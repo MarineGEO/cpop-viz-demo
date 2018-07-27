@@ -28,8 +28,8 @@ var tabulate = function (data,columns) {
   return table;
 }
 
-d3.csv('https://dl.dropboxusercontent.com/s/a3x2ppnw6kwzbz2/data.csv?dl=0',function (data) {
-	var columns = ['variable','aror','asd','maxdd']
+d3.csv('https://dl.dropboxusercontent.com/s/li1ciysypwc44t2/random_dice_generator.csv?dl=0',function (data) {
+	var columns = ['time', 'row','dice1','dice2']
   console.log(data)
   tabulate(data,columns)
 })
