@@ -44,13 +44,16 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
 
     };
 
+    //chartObj.formatAsTimestamp = d3.format("%Y-%m-%d %H:%M:%S");
+
     chartObj.xFormatter = chartObj.formatAsNumber;
     chartObj.yFormatter = chartObj.formatAsFloat;
 
     chartObj.bisectYear = d3.bisector(chartObj.xFunct).left; //< Can be overridden in definition
 
 //Create scale functions
-    chartObj.xScale = d3.scale.linear().range([0, chartObj.width]).domain(d3.extent(chartObj.data, chartObj.xFunct)); //< Can be overridden in definition
+    //chartObj.xScale = d3.scale.linear().range([0, chartObj.width]).domain(d3.extent(chartObj.data, chartObj.xFunct)); //< Can be overridden in definition
+    chartObj.xScale = d3.time.scale().range([0, chartObj.width]).domain(d3.extent(chartObj.data, chartObj.xFunct)); //< Can be overridden in definition
 
 // Get the max of every yFunct
     chartObj.max = function (fn) {
@@ -61,7 +64,8 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
     chartObj.formatAsYear = d3.format("");
 
 //Create axis
-    chartObj.xAxis = d3.svg.axis().scale(chartObj.xScale).orient("bottom").tickFormat(chartObj.xFormatter); //< Can be overridden in definition
+    //chartObj.xAxis = d3.svg.axis().scale(chartObj.xScale).orient("bottom").tickFormat(chartObj.xFormatter); //< Can be overridden in definition
+    chartObj.xAxis = d3.svg.axis().scale(chartObj.xScale).orient("bottom").tickFormat(d3.time.format("%m/%d/%Y")); //< Can be overridden in definition
 
     chartObj.yAxis = d3.svg.axis().scale(chartObj.yScale).orient("left").tickFormat(chartObj.yFormatter); //< Can be overridden in definition
 
@@ -190,7 +194,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
             }
 
             focus.select(".focus.line").attr("transform", "translate(" + chartObj.xScale(chartObj.xFunct(d)) + ")").attr("y1", minY);
-            focus.select(".focus.year").text("Year: " + chartObj.xFormatter(chartObj.xFunct(d)));
+            //focus.select(".focus.year").text("Year: " + chartObj.xFormatter(chartObj.xFunct(d)));
         }
 
     };
