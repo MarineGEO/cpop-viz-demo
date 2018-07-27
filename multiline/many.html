@@ -12,28 +12,57 @@
 <body>
 <p><a href="http://bl.ocks.org/asielen/44ffca2877d0132572cb">Reusable Responsive Multiline Chart</a></p>
 
-<div class="chart-wrapper" id="chart-line1"></div>
+<div class="chart-wrapper" id="chart-line1"></div><br>
+<div class="chart-wrapper" id="chart-line2"></div><br>
+<div class="chart-wrapper" id="chart-line3"></div><br>
+<div class="chart-wrapper" id="chart-line4"></div><br>
+<div class="chart-wrapper" id="chart-line5"></div><br>
 
 <script type="text/javascript">
     var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
     d3.csv('5k.csv', function(error, data) {
-    console.log(data[1]);
+
     data.forEach(function (d) {
         d.Timestamp = parseDate(d.Timestamp);
         d.Depth = +d.Depth;
         d.Temperature = +d.Temperature;
         d.pH = +d.pH;
         d.Turbidity = +d.Turbidity;
+        d.Chlorophyll = +d.Chlorophyll;
     });
-    console.log(data[1])
+
+    console.log(data[0])
+
     var chart = makeLineChart(data, 'Timestamp', {
         'Temperature': {column: 'Temperature'},
-        'Depth': {column: 'Depth'},
-        'pH': {column: 'pH'},
-        'Turbidity': {column: 'Turbidity'}
     }, {xAxis: 'Years', yAxis: 'Value'});
     chart.bind("#chart-line1");
+    chart.render();
+
+    var chart = makeLineChart(data, 'Timestamp', {
+        'Depth': {column: 'Depth'},
+    }, {xAxis: 'Years', yAxis: 'Value'});
+    chart.bind("#chart-line2");
+    chart.render();
+
+    var chart = makeLineChart(data, 'Timestamp', {
+        'pH': {column: 'pH'},
+    }, {xAxis: 'Years', yAxis: 'Value'});
+    chart.bind("#chart-line3");
+    chart.render();
+
+    var chart = makeLineChart(data, 'Timestamp', {
+        'Turbidity': {column: 'Turbidity'}
+    }, {xAxis: 'Years', yAxis: 'Value'});
+    chart.bind("#chart-line4");
+    chart.render();
+
+    var chart = makeLineChart(data, 'Timestamp', {
+        'Chlorophyll': {column: 'Chlorophyll'},
+        'Temperature': {column: 'Temperature'}
+    }, {xAxis: 'Years', yAxis: 'Value'});
+    chart.bind("#chart-line5");
     chart.render();
 
 });
