@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="multiline.css">
+    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <!--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
+</head>
+<body>
+<p><a href="http://bl.ocks.org/asielen/44ffca2877d0132572cb">Reusable Responsive Multiline Chart</a></p>
+
+<div class="chart-wrapper" id="chart-line1"></div>
+
+<script type="text/javascript">
+    var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
+
+    d3.csv('5k.csv', function(error, data) {
+    console.log(data[1]);
+    data.forEach(function (d) {
+        d.Timestamp = parseDate(d.Timestamp);
+        d.Depth = +d.Depth;
+        d.Temperature = +d.Temperature;
+        d.pH = +d.pH;
+        d.Turbidity = +d.Turbidity;
+    });
+    console.log(data[1])
+    var chart = makeLineChart(data, 'Timestamp', {
+        'Temperature': {column: 'Temperature'},
+        'Depth': {column: 'Depth'},
+        'pH': {column: 'pH'},
+        'Turbidity': {column: 'Turbidity'}
+    }, {xAxis: 'Years', yAxis: 'Value'});
+    chart.bind("#chart-line1");
+    chart.render();
+
+});
+</script>
+<script src="multiline.js" charset="utf-8"></script>
+</body>
+</html>
