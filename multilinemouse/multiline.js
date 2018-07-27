@@ -175,10 +175,17 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
           console.log(series);
           series.on("click", function(d){
             console.log(this.id);
-            var target = "#line-" + this.id
-            d3.select(target).attr("active", "1")
+            var target = "#line-" + this.id;
 
-            d3.select(target).style("opacity", +(toggle = !toggle))})
+            var toggleOpacity = (function(){
+                currentOpacity = d3.select(target).style("opacity")
+                currentOpacity = currentOpacity == 1 ? 0.25 : 1;
+                console.log(currentOpacity)
+                return d3.select(target).style("opacity", currentOpacity);
+            })();
+
+            //d3.select(target).style("opacity", +(toggle = !toggle))
+          })
         }
 
         // add onclick event listeners to items in legend
