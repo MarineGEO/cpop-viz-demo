@@ -17,7 +17,8 @@
 <script type="text/javascript">
     var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
-    d3.csv('5k.csv', function(error, data) {
+    //d3.csv('5k.csv', function(error, data) {
+    d3.csv('https://dl.dropboxusercontent.com/s/cq0uq34zk3tvsep/5k.csv?dl=0', function(error, data) {
     console.log(data[1]);
     data.forEach(function (d) {
         d.Timestamp = parseDate(d.Timestamp);
