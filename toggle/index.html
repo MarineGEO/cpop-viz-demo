@@ -11,7 +11,7 @@
 </head>
 <body>
 <p><a href="http://bl.ocks.org/asielen/44ffca2877d0132572cb">Reusable Responsive Multiline Chart</a></p>
-
+<div id = "timeDropdown"></div>
 <div class="chart-wrapper" id="chart-line1"></div>
 
 <script type="text/javascript">
@@ -36,6 +36,35 @@
     }, {xAxis: 'Years', yAxis: 'Value'});
     chart.bind("#chart-line1");
     chart.render();
+
+    var timeMenu = d3.select("#timeDropdown").append("select")
+          .attr("name", "timeSelector");
+
+    var timeoptions = [
+        {"timeString": "3 hours", "hours": 3},
+        {"timeString": "6 hours", "hours": 6},
+        {"timeString": "12 hours", "hours": 12},
+        {"timeString": "1 day", "hours": 24},
+        {"timeString": "2 days", "hours": 2*24},
+        {"timeString": "3 days", "hours": 3*24},
+        {"timeString": "4 days", "hours": 4*24},
+        {"timeString": "5 days", "hours": 5*24},
+        {"timeString": "1 week", "hours": 7*24, "default": "selected"},
+        {"timeString": "10 days", "hours": 10*24},
+        {"timeString": "2 weeks", "hours": 14*24},
+        {"timeString": "3 weeks", "hours": 21*24},
+        {"timeString": "1 month", "hours": 31*24},
+        {"timeString": "6 weeks", "hours": 6*7*24},
+        {"timeString": "2 months", "hours": 2*31*24}
+      ];
+
+    var options = timeMenu.selectAll("option")
+        .data(timeoptions)
+        .enter()
+        .append("option")
+        .text(function (d) { return d.timeString; })
+        .attr("value", function (d) { return d.hours; })
+        .attr("selected", function (d) { return d.default; });
 
 });
 </script>
