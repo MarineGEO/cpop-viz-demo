@@ -172,15 +172,13 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
           series.append('div').attr("class", "series-marker").style("background-color", color(y));
           series.append('p').text(y);
           yObjs[y].legend = series;
-          console.log(series);
           series.on("click", function(d){
-            console.log(this.id);
             var target = "#line-" + this.id;
 
             var toggleOpacity = (function(){
                 currentOpacity = d3.select(target).style("opacity")
                 currentOpacity = currentOpacity == 1 ? 0.25 : 1;
-                console.log(currentOpacity)
+                //console.log(currentOpacity)
                 return d3.select(target).style("opacity", currentOpacity);
             })();
 
@@ -188,14 +186,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
           })
         }
 
-        // add onclick event listeners to items in legend
-
-
-
-
         // Overlay to capture hover
-
-
         chartObj.svg.append("rect").attr("class", "overlay").attr("width", chartObj.width).attr("height", chartObj.height).on("mouseover", function () {
             focus.style("display", null);
         }).on("mouseout", function () {
