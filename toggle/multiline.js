@@ -169,16 +169,19 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         var legend = chartObj.mainDiv.append('div').attr("class", "legend");
         for (var y  in yObjs) {
           series = legend.append('div').attr("id",y);
-          series.append('div').attr("class", "series-marker").style("background-color", color(y));
+          series.append('div').attr("class", "series-marker").style("background-color", color(y)).attr("id","button-" + y);
           series.append('p').text(y);
           yObjs[y].legend = series;
           series.on("click", function(d){
             var target = "#line-" + this.id;
+            var button = "#button-" + this.id;
 
             var toggleOpacity = (function(){
-                currentOpacity = d3.select(target).style("opacity")
+                currentOpacity = d3.select(target).style("opacity");
                 currentOpacity = currentOpacity == 1 ? 0.25 : 1;
                 //console.log(currentOpacity)
+                // TODO toggle the opacity of the button
+                d3.select(button).style("opacity", currentOpacity)
                 return d3.select(target).style("opacity", currentOpacity);
             })();
 
