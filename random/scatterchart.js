@@ -56,7 +56,7 @@ var scatterplot = function(data){
 var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S:%L")
 
 function type(d) {
-  d.time = parseTime(d.time);
+  d.time = parseTime(d.Timestamp);
   d.row = +d.row;
   d.dice1 = +d.dice1;
   d.dice2 = +d.dice2;
@@ -64,7 +64,7 @@ function type(d) {
 }
 
 d3.csv('https://dl.dropboxusercontent.com/s/li1ciysypwc44t2/random_dice_generator.csv?dl=0', function (data) {
-	var columns = ['time', 'row','dice1','dice2']
+	var columns = ['Timestamp', 'row','dice1','dice2']
   console.log(data)
   console.log(data[1])
 

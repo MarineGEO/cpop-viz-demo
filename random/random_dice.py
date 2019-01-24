@@ -10,7 +10,7 @@ filename = "random_dice_generator.csv"
 # writes the header (overwrites any existing files)
 with open(filename, 'w') as f:
     wr = csv.writer(f, dialect='excel')
-    wr.writerow(['time', 'row', 'dice1', 'dice2', 'sum', 'product'])
+    wr.writerow(['Timestamp', 'row', 'dice1', 'dice2', 'sum', 'product'])
 
 
 # set the limit and counter for the while loop

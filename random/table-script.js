@@ -29,7 +29,7 @@ var tabulate = function (data,columns) {
 }
 
 d3.csv('https://dl.dropboxusercontent.com/s/li1ciysypwc44t2/random_dice_generator.csv?dl=0',function (data) {
-	var columns = ['time', 'row','dice1','dice2']
+	var columns = ['Timestamp', 'row','dice1','dice2']
   console.log(data)
   tabulate(data,columns)
 })
